@@ -2,10 +2,10 @@ import logo from './logo.svg';
 import './App.css';
 import Gallery from './Pages/Gallery';
 import Splashscreen from './Pages/Splashscreen';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Alert from './Pages/Alert';
-
-
+import Fullscreenview from './Pages/Fullscreenview'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 function App() {
   const [alertt, setalertt] = useState(null);
 
@@ -19,15 +19,31 @@ function App() {
       }, 3000);
   
   }
+  const [isSplashEnded, setIsSplashEnded] = useState(true);
+
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsSplashEnded(false);
+        }, 2000);
+
+        return () => {
+            clearTimeout(timer);
+        };
+    }, []);
 
   return (
     <div>
- 
-    <Splashscreen>
+ <Router>
     <Alert alert={alertt} />
-    <Gallery alerting={alerting}/>
-    </Splashscreen>
-   
+  
+   <Routes>
+    <Route path='/' element={isSplashEnded ?<Splashscreen /> : <Gallery  alerting={alerting}/>} />
+    <Route path='/fullscreenview/:id' element={ <Fullscreenview alerting={alerting}/>}/>
+   </Routes>
+ </Router>
+
+ 
   
     </div>
   );

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { bounce } from 'react-animations';
 import styled, { keyframes } from 'styled-components';
-
 const bounceAnimation = keyframes`${bounce}`;
 
 const Div = styled.div`
@@ -19,7 +18,7 @@ const BouncyP = styled.p`
   animation: 1s ${bounceAnimation} infinite;
 `;
 
-const Splashscreen = ({ children }) => {
+const Splashscreen = () => {
     const [isSplashEnded, setIsSplashEnded] = useState(true);
 
 
@@ -33,14 +32,13 @@ const Splashscreen = ({ children }) => {
         };
     }, []);
 
+    console.log('inside');
 
-
-    return isSplashEnded ?
-        (
+    return(
             <Div>
-                <BouncyP> Gallery Content</BouncyP>
+               <BouncyP> Gallery Content</BouncyP>
             </Div>
-        ) : children
+        );
 }
 
 export default Splashscreen
