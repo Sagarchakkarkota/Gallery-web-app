@@ -9,33 +9,35 @@ const Fullscreenview = (props) => {
     const getdata = async () => {
         const res = await fetch('https://jsonplaceholder.typicode.com/photos');
         const parseData = await res.json()
-        console.log(parseData[id-1].id);
+        // console.log(parseData[id-1].id);
         setData(parseData[id-1])
     }
 
     useEffect(()=>{
-        console.log("id",id)
+     
         getdata();
-        console.log(data);
+     
     },[])
    
     const handleClick=()=>{
         navigate("/")
     }
 
-    const handleCopy=()=>{
-    //   let input=document.getElementById("img")
-    //   input.select();
-    //   navigator.clipboard.writeText(input.value)
+    const handleCopy=()=>{ 
+      let input=document.getElementById("img")
+      input.select();
+    navigator.clipboard.writeText(input.value)
+    // above part is another type for copying text
 
-      let imageUrl=document.getElementById("img").src
 
-    let tempInput = document.createElement('input');
-    tempInput.value = imageUrl;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand('copy');
-    document.body.removeChild(tempInput);
+    // let imageUrl=document.getElementById("img").src    
+   //we can take url using getelemntbyid or we can take directly form the data
+//     let tempInput = document.createElement('input');
+//     tempInput.value = data.url;
+//     document.body.appendChild(tempInput);
+//     tempInput.select();
+//  document.execCommand('copy');
+ // document.body.removeChild(tempInput);
 
       props.alerting("Copyied to clipboard!","success")
         }
@@ -57,7 +59,7 @@ const Fullscreenview = (props) => {
       <div className="modal-body">
       <p>Copy URL</p> 
      <div className='d-flex justify-content-between'>
-     {/* <input type='text' id='img' value={data.url} /> */}
+     <input type='text' className='d-none' id='img' value={data.url} />
      {data.url}
      <button className='btn btn-light' onClick={()=>{handleCopy(data.url)}}><i className="fa-solid fa-copy"></i></button>
 
@@ -77,7 +79,7 @@ const Fullscreenview = (props) => {
     </div>
     
     <div className="d-flex justify-content-center ">
-        <img id='img' src={data.url} alt="" />
+        <img id='img'  src={data.url} alt="" />
         
 
      </div>

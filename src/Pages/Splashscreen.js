@@ -32,7 +32,7 @@ const Splashscreen = () => {
         };
     }, []);
 
-    console.log('inside');
+  
 
     return(
             <Div>
